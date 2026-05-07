@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1abc9c">
+    <title>Keuangan - RTdigital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<button class="menu-toggle d-md-none" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand"><img src="image/jambi.png" alt="Logo Kota Jambi"><h3><i class="fas fa-home"></i> RTdigital</h3></div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="kependudukan.html"><i class="fas fa-users"></i> Kependudukan</a>
+            <a href="keuangan.html" class="active"><i class="fas fa-wallet"></i> Keuangan</a>
+            <a href="inventaris.html"><i class="fas fa-boxes"></i> Inventaris</a>
+            <a href="kegiatan.html"><i class="fas fa-calendar-alt"></i> Kegiatan & Info</a>
+            <a href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a>
+			<a href="about.html"><i class="fas fa-info-circle"></i> Tentang</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+        </div>
+    </nav>
+    <main class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Keuangan</h3>
+            <button class="btn btn-danger btn-sm" onclick="exportAllPDF()"><i class="fas fa-file-pdf"></i> Export Semua PDF</button>
+        </div>
+        <ul class="nav nav-tabs mb-3" id="keuanganTab">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#kas">Kas RT</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#keamanan">Keamanan</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#jimpitan">Jimpitan</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#denda">Denda</button></li>
+        </ul>
+        <div class="tab-content">
+            <!-- Kas RT -->
+            <div class="tab-pane fade show active" id="kas">
+                <div class="card"><div class="card-header">Input Kas RT</div><div class="card-body">
+                    <form id="formkasRT">
+                        <div class="row">
+                            <div class="col-md-4 mb-2"><select class="form-select" id="kasTipe"><option>Pemasukan</option><option>Pengeluaran</option></select></div>
+                            <div class="col-md-4 mb-2"><input type="number" class="form-control" id="kasJumlah" placeholder="Jumlah" required></div>
+                            <div class="col-md-4 mb-2"><input type="date" class="form-control" id="kasTanggal" required></div>
+                        </div>
+                        <div class="mb-2"><input type="text" class="form-control" id="kasKeterangan" placeholder="Keterangan" required></div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div></div>
+                <div class="card"><div class="card-header d-flex justify-content-between"><span>Riwayat Kas RT</span><button class="btn btn-sm btn-outline-danger" onclick="exportToPDF('kasRT')">PDF</button></div>
+                <div class="card-body table-responsive"><table class="table table-hover"><thead><tr><th>Tgl</th><th>Tipe</th><th>Jumlah</th><th>Ket</th><th class="admin-only">Aksi</th></tr></thead><tbody id="bodykasRT"></tbody></table></div></div>
+            </div>
+            <!-- Keamanan -->
+            <div class="tab-pane fade" id="keamanan">
+                <div class="card"><div class="card-header">Input Uang Keamanan</div><div class="card-body">
+                    <form id="formkeamanan">
+                        <div class="row">
+                            <div class="col-md-3 mb-2"><input type="text" class="form-control" id="keamananNama" placeholder="Nama" required></div>
+                            <div class="col-md-3 mb-2"><input type="text" class="form-control" id="keamananRumah" placeholder="No.Rumah" required></div>
+                            <div class="col-md-3 mb-2"><input type="number" class="form-control" id="keamananJumlah" placeholder="Jumlah" required></div>
+                            <div class="col-md-3 mb-2"><input type="date" class="form-control" id="keamananTanggal" required></div>
+                        </div>
+                        <div class="mb-2"><input type="text" class="form-control" id="keamananKeterangan" placeholder="Keterangan"></div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div></div>
+                <div class="card"><div class="card-header d-flex justify-content-between"><span>Riwayat Keamanan</span><button class="btn btn-sm btn-outline-danger" onclick="exportToPDF('keamanan')">PDF</button></div>
+                <div class="card-body table-responsive"><table class="table"><thead><tr><th>Tgl</th><th>Nama</th><th>Rumah</th><th>Jumlah</th><th>Ket</th><th class="admin-only">Aksi</th></tr></thead><tbody id="bodykeamanan"></tbody></table></div></div>
+            </div>
+            <!-- Jimpitan -->
+            <div class="tab-pane fade" id="jimpitan">
+                <div class="card"><div class="card-header">Input Uang Jimpitan</div><div class="card-body">
+                    <form id="formjimpitan">
+                        <div class="row">
+                            <div class="col-md-3 mb-2"><input type="text" class="form-control" id="jimpitanNama" placeholder="Nama" required></div>
+                            <div class="col-md-3 mb-2"><input type="text" class="form-control" id="jimpitanRumah" placeholder="No.Rumah" required></div>
+                            <div class="col-md-3 mb-2"><input type="number" class="form-control" id="jimpitanJumlah" placeholder="Jumlah" required></div>
+                            <div class="col-md-3 mb-2"><input type="date" class="form-control" id="jimpitanTanggal" required></div>
+                        </div>
+                        <div class="mb-2"><input type="text" class="form-control" id="jimpitanKeterangan" placeholder="Keterangan"></div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div></div>
+                <div class="card"><div class="card-header d-flex justify-content-between"><span>Riwayat Jimpitan</span><button class="btn btn-sm btn-outline-danger" onclick="exportToPDF('jimpitan')">PDF</button></div>
+                <div class="card-body table-responsive"><table class="table"><thead><tr><th>Tgl</th><th>Nama</th><th>Rumah</th><th>Jumlah</th><th>Ket</th><th class="admin-only">Aksi</th></tr></thead><tbody id="bodyjimpitan"></tbody></table></div></div>
+            </div>
+            <!-- Denda -->
+            <div class="tab-pane fade" id="denda">
+                <div class="card"><div class="card-header">Input Uang Denda</div><div class="card-body">
+                    <form id="formdenda">
+                        <div class="row">
+                            <div class="col-md-3 mb-2"><input type="text" class="form-control" id="dendaNama" placeholder="Nama" required></div>
+                            <div class="col-md-3 mb-2"><input type="text" class="form-control" id="dendaRumah" placeholder="No.Rumah" required></div>
+                            <div class="col-md-3 mb-2"><input type="number" class="form-control" id="dendaJumlah" placeholder="Jumlah" required></div>
+                            <div class="col-md-3 mb-2"><input type="date" class="form-control" id="dendaTanggal" required></div>
+                        </div>
+                        <div class="mb-2"><select class="form-select" id="dendaAlasan"><option>Terlambat Iuran</option><option>Tidak Hadir Rapat</option><option>Pelanggaran RT</option><option>Lainnya</option></select></div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div></div>
+                <div class="card"><div class="card-header d-flex justify-content-between"><span>Riwayat Denda</span><button class="btn btn-sm btn-outline-danger" onclick="exportToPDF('denda')">PDF</button></div>
+                <div class="card-body table-responsive"><table class="table"><thead><tr><th>Tgl</th><th>Nama</th><th>Rumah</th><th>Alasan</th><th>Jumlah</th><th class="admin-only">Aksi</th></tr></thead><tbody id="bodydenda"></tbody></table></div></div>
+            </div>
+        </div>
+        <div class="copyright">© 2026 LABABIL SOLUTION | 08997499994 / 08139899985</div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/keuangan.js"></script>
+	<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (menuBtn && sidebar) {
+            console.log('Tombol sidebar ditemukan! Siap diklik.');
+            
+            menuBtn.addEventListener('click', function() {
+                console.log('TOMBOL DIKLIK!'); // Cek di Console
+                sidebar.classList.toggle('open');
+            });
+            
+            // Tutup sidebar jika klik di luar
+            document.addEventListener('click', function(e) {
+                if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        } else {
+            console.error('GAGAL: Tombol atau Sidebar tidak ditemukan! Cek ID HTML.');
+        }
+    });
+	</script>
+	<!-- Tambahkan ini di keuangan.html, sebelum </body> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</body>
+</html>

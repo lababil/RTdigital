@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1abc9c">
+    <title>Dashboard - RTdigital</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle d-md-none" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <img src="image/jambi.png" alt="Logo Kota Jambi" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px;">
+            <h3><i class="fas fa-home"></i> RTdigital</h3>
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="kependudukan.html"><i class="fas fa-users"></i> Kependudukan</a>
+            <a href="keuangan.html"><i class="fas fa-wallet"></i> Keuangan</a>
+            <a href="inventaris.html"><i class="fas fa-boxes"></i> Inventaris</a>
+            <a href="kegiatan.html"><i class="fas fa-calendar-alt"></i> Kegiatan & Info</a>
+            <a href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="top-bar">
+            <h4><i class="fas fa-chart-line me-2"></i>Dashboard</h4>
+            <div class="user-info">
+                <span id="userName">User</span>
+                <span class="badge bg-primary" id="userRole">WARGA</span>
+            </div>
+        </div>
+
+        <!-- Statistik Grid -->
+        <div class="stat-grid">
+            <div class="stat-box">
+                <i class="fas fa-users text-primary"></i>
+                <h3 id="totalWarga">0</h3>
+                <p>Total Warga</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-money-bill-wave text-success"></i>
+                <h3 id="kasRT">Rp 0</h3>
+                <p>Kas RT</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-shield-alt text-warning"></i>
+                <h3 id="uangKeamanan">Rp 0</h3>
+                <p>Uang Keamanan</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-coins text-info"></i>
+                <h3 id="uangJimpitan">Rp 0</h3>
+                <p>Uang Jimpitan</p>
+            </div>
+        </div>
+
+        <!-- CCTV Streaming Section -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-video me-2"></i>Live CCTV RT - Monitoring Keamanan</h5>
+                <span class="badge bg-secondary" id="cctvStatus"><i class="fas fa-circle me-1"></i>Loading</span>
+            </div>
+            <div class="card-body p-0 bg-dark">
+                <div class="ratio ratio-16x9">
+                    <video
+                        id="cctvPlayer"
+                        class="video-js vjs-fluid vjs-default-skin"
+                        controls
+                        preload="auto"
+                        autoplay
+                        muted
+                        playsinline
+                        data-setup='{}'
+                        style="width: 100%; height: 100%;"
+                    >
+                        <source src="" type="application/x-mpegURL">
+                        <p class="vjs-no-js text-white p-3">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Mohon aktifkan JavaScript untuk menonton live streaming CCTV.
+                        </p>
+                    </video>
+                </div>
+            </div>
+            <div class="card-footer text-muted small d-flex justify-content-between align-items-center">
+                <span><i class="fas fa-info-circle me-1"></i> Streaming Real-time</span>
+                <span id="cctvUrlDisplay" class="text-truncate" style="max-width: 300px;">-</span>
+            </div>
+        </div>
+
+        <!-- Informasi RT -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Informasi RT</h5>
+            </div>
+            <div class="card-body" id="rtInfo">
+                <div class="text-center text-muted py-4">
+                    <i class="fas fa-spinner fa-spin fa-2x mb-2"></i>
+                    <p>Memuat data...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p class="mb-1"><strong>LABABIL SOLUTION</strong></p>
+            <p class="mb-0"><i class="fas fa-phone me-2"></i>08997499994 / 08139899985</p>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Video.js -->
+    <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
+    
+    <!-- Main Module Script -->
+    <script type="module" src="js/dashboard.js"></script>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768) {
+                    if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+                        sidebar.classList.remove('open');
+                    }
+                }
+            });
+        }
+    });
+
+    function logout() {
+        if(confirm('Yakin ingin keluar?')) {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+    }
+    </script>
+</body>
+</html>

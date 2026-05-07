@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1abc9c">
+    <title>Inventaris - RTdigital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<button class="menu-toggle d-md-none" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand"><img src="image/jambi.png" alt="Logo Kota Jambi"><h3><i class="fas fa-home"></i> RTdigital</h3></div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="kependudukan.html"><i class="fas fa-users"></i> Kependudukan</a>
+            <a href="keuangan.html"><i class="fas fa-wallet"></i> Keuangan</a>
+            <a href="inventaris.html" class="active"><i class="fas fa-boxes"></i> Inventaris</a>
+            <a href="kegiatan.html"><i class="fas fa-calendar-alt"></i> Kegiatan & Info</a>
+            <a href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a>
+			<a href="about.html"><i class="fas fa-info-circle"></i> Tentang</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+        </div>
+    </nav>
+    <main class="main-content">
+        <h3>Inventaris</h3>
+        <div class="card"><div class="card-header">Tambah Barang</div><div class="card-body">
+            <form id="formBarang">
+                <div class="row">
+                    <div class="col-md-4 mb-2"><input type="text" class="form-control" id="namaBarang" placeholder="Nama Barang" required></div>
+                    <div class="col-md-4 mb-2"><input type="number" class="form-control" id="jumlahBarang" placeholder="Jumlah" required></div>
+                    <div class="col-md-4 mb-2"><select class="form-select" id="kondisi"><option>Baik</option><option>Rusak Ringan</option><option>Rusak Berat</option></select></div>
+                </div>
+                <div class="mb-2"><input type="text" class="form-control" id="lokasi" placeholder="Lokasi"></div>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+        </div></div>
+        <div class="card"><div class="card-header">Daftar Barang</div><div class="card-body table-responsive"><table class="table table-hover"><thead><tr><th>Nama</th><th>Jml</th><th>Kondisi</th><th>Lokasi</th><th class="admin-only">Aksi</th></tr></thead><tbody id="tabelBarang"></tbody></table></div></div>
+        
+        <h4 class="mt-4">Peminjaman</h4>
+        <div class="card"><div class="card-header">Ajukan Peminjaman</div><div class="card-body">
+            <form id="formPinjam">
+                <div class="row">
+                    <div class="col-md-4 mb-2"><input type="text" class="form-control" id="namaPeminjam" placeholder="Nama Peminjam" required></div>
+                    <div class="col-md-4 mb-2"><select class="form-select" id="barangPinjam" required><option value="">Pilih Barang</option></select></div>
+                    <div class="col-md-4 mb-2"><input type="number" class="form-control" id="jumlahPinjam" placeholder="Jumlah" min="1" required></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2"><input type="date" class="form-control" id="tglPinjam" required></div>
+                    <div class="col-md-6 mb-2"><input type="date" class="form-control" id="tglKembali" required></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+        </div></div>
+        <div class="card"><div class="card-header">Riwayat Peminjaman</div><div class="card-body table-responsive"><table class="table"><thead><tr><th>Peminjam</th><th>Barang</th><th>Jml</th><th>Tgl Pinjam</th><th>Tgl Kembali</th><th>Status</th><th class="admin-only">Aksi</th></tr></thead><tbody id="tabelPinjam"></tbody></table></div></div>
+        <div class="copyright">© 2026 LABABIL SOLUTION | 08997499994 / 08139899985</div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/inventaris.js"></script>
+	<<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (menuBtn && sidebar) {
+            console.log('Tombol sidebar ditemukan! Siap diklik.');
+            
+            menuBtn.addEventListener('click', function() {
+                console.log('TOMBOL DIKLIK!'); // Cek di Console
+                sidebar.classList.toggle('open');
+            });
+            
+            // Tutup sidebar jika klik di luar
+            document.addEventListener('click', function(e) {
+                if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        } else {
+            console.error('GAGAL: Tombol atau Sidebar tidak ditemukan! Cek ID HTML.');
+        }
+    });
+	</script>
+</body>
+</html>

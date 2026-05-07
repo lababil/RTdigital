@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1abc9c">
+    <title>Kependudukan - RTdigital</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle d-md-none" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <img src="image/jambi.png" alt="Logo Kota Jambi" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px;">
+            <h3><i class="fas fa-home"></i> RTdigital</h3>
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="kependudukan.html" class="active"><i class="fas fa-users"></i> Kependudukan</a>
+            <a href="keuangan.html"><i class="fas fa-wallet"></i> Keuangan</a>
+            <a href="inventaris.html"><i class="fas fa-boxes"></i> Inventaris</a>
+            <a href="kegiatan.html"><i class="fas fa-calendar-alt"></i> Kegiatan & Info</a>
+            <a href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a>
+			<a href="about.html"><i class="fas fa-info-circle"></i> Tentang</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="top-bar">
+            <h4><i class="fas fa-users me-2"></i>Kependudukan</h4>
+            <div class="user-info">
+                <span id="userName">User</span>
+                <span class="badge bg-primary" id="userRole">WARGA</span>
+            </div>
+        </div>
+
+        <!-- Form Input Data Warga -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-user-plus me-2"></i>Input Data Warga</h5>
+            </div>
+            <div class="card-body">
+                <form id="formWarga">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">NIK <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nik" placeholder="16 digit NIK" maxlength="16" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">Nama Lengkap <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nama" placeholder="Nama lengkap sesuai KTP" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">No. Rumah <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="noRumah" placeholder="Nomor rumah" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">Tempat Lahir <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="tempatLahir" placeholder="Tempat lahir" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">Tanggal Lahir <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="tglLahir" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">Jenis Kelamin <span class="text-danger">*</span></label>
+                            <select class="form-select" id="jk" required>
+                                <option value="">Pilih</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">Agama</label>
+                            <select class="form-select" id="agama">
+                                <option value="">Pilih</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Kristen">Kristen</option>
+                                <option value="Katolik">Katolik</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Buddha">Buddha</option>
+                                <option value="Konghucu">Konghucu</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">Pendidikan</label>
+                            <input type="text" class="form-control" id="pendidikan" placeholder="Pendidikan terakhir">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label fw-semibold">Pekerjaan</label>
+                            <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan">
+                        </div>
+                    </div>
+                    
+                    <!-- Upload KK -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Upload KK (PDF) <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="fileKK" accept=".pdf" required>
+                        <div class="form-text">
+                            <i class="fas fa-info-circle text-primary"></i> Format: <strong>PDF only</strong> | Maksimal: <strong>300 KB</strong>
+                        </div>
+                        <div id="fileInfo" class="mt-2"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Simpan Data
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Daftar Warga -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-list me-2"></i>Daftar Warga</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th width="5%">No</th>
+                                <th width="15%">NIK</th>
+                                <th width="25%">Nama</th>
+                                <th width="10%">Rumah</th>
+                                <th width="10%">JK</th>
+                                <th width="20%">KK</th>
+                                <th width="15%" class="admin-only">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelWarga">
+                            <tr><td colspan="7" class="text-center"><i class="fas fa-spinner fa-spin"></i> Memuat data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p class="mb-1"><strong>LABABIL SOLUTION</strong></p>
+            <p class="mb-0"><i class="fas fa-phone me-2"></i>08997499994 / 08139899985</p>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- File Preview Script -->
+    <script>
+    document.getElementById('fileKK').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const fileInfo = document.getElementById('fileInfo');
+        
+        if (file) {
+            // Cek tipe file
+            if (file.type !== 'application/pdf') {
+                fileInfo.innerHTML = '<div class="alert alert-danger py-2 mb-0"><i class="fas fa-exclamation-triangle"></i> File harus berformat PDF!</div>';
+                this.value = '';
+                return;
+            }
+            
+            // Cek ukuran
+            const fileSizeKB = file.size / 1024;
+            if (fileSizeKB > 300) {
+                fileInfo.innerHTML = `<div class="alert alert-danger py-2 mb-0"><i class="fas fa-exclamation-triangle"></i> Ukuran file ${fileSizeKB.toFixed(1)} KB melebihi batas 300 KB!</div>`;
+                this.value = '';
+                return;
+            }
+            
+            // Tampilkan info file
+            fileInfo.innerHTML = `
+                <div class="alert alert-success py-2 mb-0">
+                    <i class="fas fa-check-circle"></i> 
+                    <strong>${file.name}</strong><br>
+                    <small>Ukuran: ${fileSizeKB.toFixed(1)} KB</small>
+                </div>
+            `;
+        } else {
+            fileInfo.innerHTML = '';
+        }
+    });
+    </script>
+
+    <!-- Main Module Script -->
+    <script type="module" src="js/kependudukan.js"></script>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (menuBtn && sidebar) {
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768) {
+                    if (!sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+                        sidebar.classList.remove('open');
+                    }
+                }
+            });
+        }
+    });
+
+    function logout() {
+        if(confirm('Yakin ingin keluar?')) {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+    }
+    </script>
+</body>
+</html>
