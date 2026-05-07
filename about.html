@@ -2,204 +2,84 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#1abc9c">
-    <title>Tentang - RTdigital</title>
-    
-    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - RTdigital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
-    
-    <style>
-        body {
-            background-image: url('image/bg.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(248, 249, 250, 0.93);
-            z-index: -1;
-        }
-        .cap-logo {
-            max-width: 130px;
-            height: auto;
-            margin: 0 auto 15px;
-            display: block;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
-        }
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 10px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        .social-btn:hover { transform: translateY(-2px); color: white; }
-        .btn-website { background: linear-gradient(135deg, #3498db, #2980b9); }
-        .btn-maps { background: linear-gradient(135deg, #4285f4, #3367d6); }
-        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
-        .btn-youtube { background: linear-gradient(135deg, #FF0000, #CC0000); }
-        .card { border: none; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
-        @media (min-width: 768px) { .social-grid { grid-template-columns: repeat(4, 1fr); } }
-    </style>
 </head>
 <body>
+    <button class="menu-toggle" id="menuBtn"><i class="fas fa-bars"></i></button>
 
-    <!-- Mobile Menu Toggle -->
-    <button class="menu-toggle d-md-none" id="menuBtn">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-brand">
-            <img src="image/jambi.png" alt="Logo Kota Jambi" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px;">
-            <h3><i class="fas fa-home"></i> RTdigital</h3>
+            <img src="image/jambi.png" alt="Logo">
+            <h3>RTdigital</h3>
         </div>
         <div class="sidebar-menu">
             <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
             <a href="kependudukan.html"><i class="fas fa-users"></i> Kependudukan</a>
-            <a href="keuangan.html"><i class="fas fa-wallet"></i> Keuangan</a>
-            <a href="inventaris.html"><i class="fas fa-boxes"></i> Inventaris</a>
-            <a href="kegiatan.html"><i class="fas fa-calendar-alt"></i> Kegiatan & Info</a>
-            <a href="pengaturan.html"><i class="fas fa-cog"></i> Pengaturan</a>
             <a href="about.html" class="active"><i class="fas fa-info-circle"></i> Tentang</a>
-            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+            <a href="#" onclick="logout()" class="text-danger mt-3"><i class="fas fa-sign-out-alt"></i> Keluar</a>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="top-bar">
-            <h4><i class="fas fa-info-circle me-2"></i>Tentang Aplikasi</h4>
-            <div class="user-info">
-                <span id="userName">User</span>
-                <span class="badge bg-primary" id="userRole">WARGA</span>
-            </div>
+            <h4><i class="fas fa-info-circle me-2 text-primary"></i> Tentang Aplikasi</h4>
         </div>
 
-        <!-- Header -->
-        <div class="card mb-4">
-            <div class="card-body text-center py-4">
-                <img src="image/cap.png" alt="Lababil Solution" class="cap-logo">
-                <h2 class="fw-bold mb-1" style="color: #1abc9c;">LABABIL SOLUTION</h2>
-                <p class="text-muted mb-0">Digital Transformation Partner</p>
-            </div>
-        </div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5 text-center">
+                <img src="image/kb.png" alt="Logo" class="mb-4" style="width: 120px;">
+                <h2 class="fw-bold mb-3">RTdigital V1.0</h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">
+                    Sistem Manajemen Lingkungan RT berbasis Digital yang dirancang untuk mempermudah warga dalam mengakses informasi, transparansi keuangan, dan pengelolaan data kependudukan secara real-time.
+                </p>
+                
+                <hr class="my-5 opacity-25">
 
-        <div class="row">
-            <!-- Info App -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-header"><h5 class="mb-0"><i class="fas fa-mobile-alt me-2"></i>Info Aplikasi</h5></div>
-                    <div class="card-body text-center">
-                        <img src="image/kb.png" alt="Logo KB" style="max-width: 100px; margin-bottom: 15px;">
-                        <h3 class="fw-bold text-primary">RTdigital</h3>
-                        <p class="text-muted">Sistem Manajemen Rukun Tetangga Digital</p>
-                        <div class="d-flex justify-content-center gap-4 mt-3">
-                            <div><h5 class="mb-0 text-primary">v1.0.0</h5><small>Versi</small></div>
-                            <div><h5 class="mb-0 text-primary">2026</h5><small>Rilis</small></div>
-                            <div><h5 class="mb-0 text-primary">Gratis</h5><small>Biaya</small></div>
+                <div class="row g-4 text-start">
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded-4 h-100">
+                            <h6 class="fw-bold"><i class="fas fa-shield-alt text-primary me-2"></i> Keamanan</h6>
+                            <p class="small text-muted mb-0">Pemantauan lingkungan melalui integrasi CCTV Live Streaming.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded-4 h-100">
+                            <h6 class="fw-bold"><i class="fas fa-hand-holding-usd text-success me-2"></i> Transparansi</h6>
+                            <p class="small text-muted mb-0">Laporan kas, jimpitan, dan dana keamanan yang dapat dipantau setiap saat.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded-4 h-100">
+                            <h6 class="fw-bold"><i class="fas fa-mobile-alt text-info me-2"></i> Responsif</h6>
+                            <p class="small text-muted mb-0">Dapat diakses dengan nyaman melalui Smartphone maupun Laptop.</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Kontak -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-header"><h5 class="mb-0"><i class="fas fa-link me-2"></i>Hubungi Kami</h5></div>
-                    <div class="card-body">
-                        <p class="text-center text-muted mb-3">Klik tombol untuk terhubung</p>
-                        <div class="social-grid">
-                            <a href="https://lababil.biz.id/" target="_blank" class="social-btn btn-website"><i class="fas fa-globe"></i> Website</a>
-                            <a href="https://maps.app.goo.gl/hjUTA3dKt4QCHDVg9" target="_blank" class="social-btn btn-maps"><i class="fas fa-map-marker-alt"></i> Lokasi</a>
-                            <a href="https://wa.me/628997499994" target="_blank" class="social-btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="https://youtube.com/@lababilsolution" target="_blank" class="social-btn btn-youtube"><i class="fab fa-youtube"></i> YouTube</a>
-                        </div>
-                        <hr>
-                        <p class="text-center mb-0 small"><i class="fas fa-phone me-1"></i> 08997499994 / 08139899985</p>
+                <div class="mt-5">
+                    <p class="mb-2 fw-bold text-dark">Developed by:</p>
+                    <h5 class="text-primary fw-bold">LABABIL SOLUTION</h5>
+                    <div class="d-flex justify-content-center gap-3 mt-3">
+                        <a href="https://wa.me/628997499994" class="btn btn-outline-success btn-sm rounded-pill px-3">
+                            <i class="fab fa-whatsapp me-1"></i> Kontak Kami
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body text-center py-3">
-                <p class="mb-1"><strong>LABABIL SOLUTION</strong></p>
-                <p class="mb-0 text-muted small">© 2026 All Rights Reserved. | Jambi, Indonesia</p>
-            </div>
-        </div>
-
-        <div class="copyright">
-            <p class="mb-0"><i class="fas fa-heart text-danger me-1"></i> Dibuat untuk kemajuan RT digital</p>
         </div>
     </main>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Module Script (Auth Stabil + Sidebar Toggle) -->
-    <script type="module">
-        import { checkAuth } from './js/firebase-config.js';
-        import { logoutUser } from './js/auth.js';
-
-        // Sidebar Toggle Logic
+    <script>
+        // Script untuk sidebar mobile
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
-        if (menuBtn && sidebar) {
+        if (menuBtn) {
             menuBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
-                    sidebar.classList.remove('open');
-                }
-            });
         }
-
-        // Auth Check Menggunakan Firebase (Stabil)
-        checkAuth((user) => {
-            if (!user.isLoggedIn) {
-                // Hanya redirect jika benar-benar belum login
-                window.location.href = 'index.html';
-            } else {
-                // Tampilkan data user tanpa redirect
-                document.getElementById('userName').textContent = user.nama || 'User';
-                document.getElementById('userRole').textContent = (user.role || 'warga').toUpperCase();
-            }
-        });
-
-        // Logout Function
-        window.logout = async () => {
-            if(confirm('Yakin ingin keluar?')) {
-                await logoutUser();
-                window.location.href = 'index.html';
-            }
-        };
     </script>
 </body>
 </html>
