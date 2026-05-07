@@ -54,331 +54,84 @@ th { background: #f8f9fa; }
 .nav-tabs .nav-link { border: none; color: #666; font-weight: 500; }
 .nav-tabs .nav-link.active { color: var(--primary); border-bottom: 3px solid var(--primary); background: transparent; }
 .copyright { text-align: center; padding: 20px; color: #888; font-size: 0.9rem; margin-top: 40px; }
+/* ===== RESPONSIVE MOBILE (GABUNGAN) ===== */
 @media (max-width: 768px) {
-    .login-card { flex-direction: column; }
+    /* Layout & Sidebar */
+    .login-card { flex-direction: column; margin: 10px; }
     .login-brand, .login-form { width: 100%; }
-    .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
-    .sidebar.open { transform: translateX(0); }
-    .main-content { margin-left: 0; }
-}
-/* Tambahkan di bagian bawah style.css */
+    .login-brand { padding: 30px 20px; min-height: 150px; }
+    .login-brand h1 { font-size: 1.8rem; }
+    .login-form { padding: 30px 20px; }
 
-/* ===== RESPONSIVE MOBILE ===== */
-@media (max-width: 768px) {
-    /* Sidebar */
-    .sidebar {
-        transform: translateX(-100%); /* Tersembunyi default di HP */
-        box-shadow: none;
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-        box-shadow: 4px 0 20px rgba(0,0,0,0.4);
-    }
-
-    /* Main Content menyesuaikan */
-    .main-content {
-        margin-left: 0 !important;
-        padding-top: 70px; /* Beri ruang agar tidak tertutup tombol */
-    }
+    .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; box-shadow: none; }
+    .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.4); }
+    .sidebar-brand h3 { font-size: 1.2rem; }
     
-    /* Top Bar */
-    .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 15px;
-    }
+    /* Main Content */
+    .main-content { margin-left: 0 !important; padding-top: 70px; }
     
-    .top-bar h4 {
-        font-size: 1.2rem;
-    }
-    
-    /* Stats Grid */
-    .stat-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .stat-box {
-        padding: 15px;
-    }
-    
-    .stat-box h3 {
-        font-size: 1.5rem;
-    }
-    
-    /* Cards */
-    .card-body {
-        padding: 15px;
-    }
-    
-    /* Tables */
-    .table-responsive {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    table {
-        min-width: 600px;
-    }
-    
-    /* Forms */
-    .row > div {
-        margin-bottom: 10px;
-    }
-    
-    /* Buttons */
-    .btn {
-        font-size: 0.9rem;
-        padding: 8px 15px;
-    }
-    
-    /* Login Page */
-    .login-card {
-        flex-direction: column;
-        margin: 10px;
-    }
-    
-    .login-brand {
-        width: 100%;
-        padding: 30px 20px;
-        min-height: 150px;
-    }
-    
-    .login-brand h1 {
-        font-size: 1.8rem;
-    }
-    
-    .login-form {
-        width: 100%;
-        padding: 30px 20px;
-    }
-    
-    .nav-tabs .nav-link {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-    }
-    
-    /* Social Buttons */
-    .social-links {
-        flex-direction: column;
-        width: 100%;
-        padding: 0 20px;
-    }
-    
-    .social-btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    /* Sidebar Brand */
-    .sidebar-brand h3 {
-        font-size: 1.2rem;
-    }
-    
-    /* Menu Toggle Button */
-    .menu-toggle {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    /* Tombol Menu */
-    .menu-toggle {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        position: fixed !important;
-        top: 15px !important;
-        left: 15px !important;
-        z-index: 9999 !important; /* Pastikan paling atas */
-        background: #1abc9c;
-        color: white;
-        border: none;
-        padding: 12px 14px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        pointer-events: auto !important;
-        transition: all 0.3s;
-    }
-
-    .menu-toggle:active {
-        transform: scale(0.95);
-    }
-}
-
-/* Tablet */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .stat-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .sidebar {
-        transform: translateX(0) !important;
-    }
-    .menu-toggle {
-        display: none !important;
-    }
-    .main-content {
-        margin-left: 240px;
-        padding-top: 30px;
-    }
-}
-
-/* Desktop Kecil */
-@media (min-width: 1025px) and (max-width: 1200px) {
-    .stat-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* Perbaikan untuk semua layar */
-* {
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 16px;
-    -webkit-text-size-adjust: 100%;
-}
-
-body {
-    overflow-x: hidden;
-}
-
-/* Pastikan gambar responsif */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Perbaiki input form di mobile */
-input, select, textarea {
-    font-size: 16px; /* Mencegah zoom otomatis di iOS */
-}
-
-/* Table scroll yang lebih baik */
-.table-responsive {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-
-/* Card adjustments */
-.card {
-    margin-bottom: 15px;
-}
-
-/* Typography responsive */
-h1, h2, h3, h4, h5, h6 {
-    line-height: 1.3;
-    word-wrap: break-word;
-}
-
-/* Navigation menu mobile */
-.sidebar-menu {
-    padding: 20px 10px;
-}
-
-.sidebar-menu a {
-    padding: 12px 15px;
-    margin: 5px 0;
-}
-/* Tambahkan di bagian bawah style.css */
-
-.social-links {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.social-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.social-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-.social-btn i {
-    font-size: 1.2rem;
-}
-
-.social-btn.whatsapp {
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    color: white;
-}
-
-.social-btn.whatsapp:hover {
-    background: linear-gradient(135deg, #128C7E, #075E54);
-    color: white;
-}
-
-.social-btn.youtube {
-    background: linear-gradient(135deg, #FF0000, #CC0000);
-    color: white;
-}
-
-.social-btn.youtube:hover {
-    background: linear-gradient(135deg, #CC0000, #990000);
-    color: white;
-}
-
-/* Responsive untuk mobile */
-@media (max-width: 768px) {
-    .social-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .social-btn {
-        width: 80%;
-        justify-content: center;
-    }
-}
-
-/* === PERBAIKAN TOMBOL MENU MOBILE === */
-@media (max-width: 768px) {
+    /* Tombol Menu Mobile */
     .menu-toggle {
         display: flex !important;
         position: fixed !important;
         top: 15px !important;
         left: 15px !important;
-        z-index: 99999 !important; /* Pastikan paling atas */
+        z-index: 99999 !important;
         background: #1abc9c;
         color: white;
         border: none;
         padding: 12px 15px;
         border-radius: 8px;
         cursor: pointer;
-        pointer-events: auto !important; /* Wajib bisa diklik */
+        pointer-events: auto !important;
         box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        transition: all 0.3s;
     }
+    .menu-toggle:active { transform: scale(0.95); }
 
-    /* Sidebar tersembunyi di HP */
-    .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
+    /* Top Bar & Stats */
+    .top-bar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 15px; }
+    .top-bar h4 { font-size: 1.2rem; }
+    .stat-grid { grid-template-columns: 1fr; gap: 15px; }
+    .stat-box { padding: 15px; }
+    .stat-box h3 { font-size: 1.5rem; }
     
-    /* Sidebar muncul saat class .open aktif */
-    .sidebar.open {
-        transform: translateX(0);
-    }
+    /* Cards & Tables */
+    .card-body { padding: 15px; }
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { min-width: 600px; }
+    .row > div { margin-bottom: 10px; }
+    
+    /* Buttons & Navs */
+    .btn { font-size: 0.9rem; padding: 8px 15px; }
+    .nav-tabs .nav-link { padding: 10px 15px; font-size: 0.9rem; }
+    
+    /* Social Links */
+    .social-links { flex-direction: column; width: 100%; padding: 0 20px; align-items: center; }
+    .social-btn { width: 100%; justify-content: center; }
 }
+
+/* Tablet Setup */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .sidebar { transform: translateX(0) !important; }
+    .menu-toggle { display: none !important; }
+    .main-content { margin-left: 240px; padding-top: 30px; }
+}
+
+/* Desktop Kecil */
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .stat-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Base Fixes */
+* { box-sizing: border-box; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { overflow-x: hidden; }
+img { max-width: 100%; height: auto; }
+input, select, textarea { font-size: 16px; } /* Mencegah zoom otomatis di iOS */
+.table-responsive { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; }
+.card { margin-bottom: 15px; }
+h1, h2, h3, h4, h5, h6 { line-height: 1.3; word-wrap: break-word; }
+.sidebar-menu { padding: 20px 10px; }
+.sidebar-menu a { padding: 12px 15px; margin: 5px 0; }
