@@ -79,36 +79,44 @@ function loadStatistik() {
 
 // Load informasi RT
 async function loadInformasiRT() {
+    const rtInfoContainer = document.getElementById('rtInfo');
+    if (!rtInfoContainer) return;
+
     try {
-        const snap = await get(ref(db, 'settings/profil'));
-        const container = document.getElementById('rtInfo');
+        // Asumsi menggunakan Firestore (sesuaikan jika menggunakan Realtime Database)
+        // Jika data kosong, tampilkan pesan "Belum ada pengumuman"
+        const snapshot = await getDocs(collection(db, "pengumuman")); // Ganti sesuai struktur DB Anda
         
-        if (!snap.exists()) {
-            container.innerHTML = `
-                <div class="text-center text-muted py-4">
-                    <i class="fas fa-info-circle fa-2x mb-2"></i>
-                    <p>Belum ada informasi RT. Admin silakan isi di menu Pengaturan.</p>
-                </div>
-            `;
+        if (snapshot.empty) {
+            rtInfoContainer.innerHTML = `
+                <div class="text-center py-4 text-muted">
+                    <i class="fas fa-info-circle mb-2"></i>
+                    <p>Belum ada pengumuman terbaru saat ini.</p>
+                </div>`;
             return;
         }
-        
-        const data = snap.val();
-        container.innerHTML = `
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-2"><i class="fas fa-building text-primary me-2"></i><strong>${data.namaRT || '-'}</strong></p>
-                    <p class="mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i>${data.alamatLengkap || '-'}</p>
-                </div>
-                <div class="col-md-6">
-                    <p class="mb-2"><i class="fas fa-map text-success me-2"></i>${data.kelurahan || '-'}, ${data.kecamatan || '-'}</p>
-                    <p class="mb-2"><i class="fas fa-city text-info me-2"></i>${data.kota || '-'}</p>
-                </div>
-            </div>
-        `;
-        
+
+        let html = '<ul class="list-group list-group-flush">';
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            html += `
+                <li class="list-group-item border-0 px-0 mb-2">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1 fw-bold text-dark">${data.judul || 'Tanpa Judul'}</h6>
+                        <small class="text-muted">${data.tanggal || ''}</small>
+                    </div>
+                    <p class="mb-1 text-muted small">${data.isi || ''}</p>
+                </li>`;
+        });
+        html += '</ul>';
+        rtInfoContainer.innerHTML = html;
+
     } catch (error) {
-        console.error('Error loading RT info:', error);
+        console.error("Error loading RT Info:", error);
+        rtInfoContainer.innerHTML = `
+            <div class="alert alert-light text-center small">
+                Gagal memuat informasi. Pastikan koneksi internet stabil.
+            </div>`;
     }
 }
 
