@@ -27,13 +27,13 @@ import {
 
 // ⚠️ PASTE CONFIG DARI FIREBASE CONSOLE DI SINI ⚠️
 const firebaseConfig = {
-  apiKey: "AIzaSyC8Bqx7RJIY05RU_cWg-tn02MOIOjy2iAc",
-  authDomain: "rtdigital-c96fc.firebaseapp.com",
-  databaseURL: "https://rtdigital-c96fc-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "rtdigital-c96fc",
-  storageBucket: "rtdigital-c96fc.firebasestorage.app",
-  messagingSenderId: "866202287618",
-  appId: "1:866202287618:web:d3f4669e079d5d85e8711b"
+  apiKey: "AIzaSyC0Gk2Q8Vq-vmkqPVQJ6SC5wOdB9G_XB7g",
+  authDomain: "rtdigital-ba4cd.firebaseapp.com",
+  databaseURL: "https://rtdigital-ba4cd-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "rtdigital-ba4cd",
+  storageBucket: "rtdigital-ba4cd.firebasestorage.app",
+  messagingSenderId: "235080197270",
+  appId: "1:235080197270:web:357ec53a9d3b2074720eb7"
 };
 
 // Initialize Firebase
