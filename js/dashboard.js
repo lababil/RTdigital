@@ -120,68 +120,36 @@ async function loadInformasiRT() {
     }
 }
 
-// Initialize CCTV Streaming
+// Simple CCTV link handler
 async function initCCTV() {
-    const statusBadge = document.getElementById('cctvStatus');
-    const urlDisplay = document.getElementById('cctvUrlDisplay');
-    
     try {
-        console.log('🎥 Loading CCTV configuration...');
+        const statusBadge = document.getElementById('cctvStatus');
+        const cctvLink = document.getElementById('cctvLink');
         
+        // Get config from Firebase
         const snap = await get(ref(db, 'settings/cctv'));
-        if (!snap.exists()) {
-            console.log('ℹ️ CCTV not configured');
-            statusBadge.className = 'badge bg-secondary';
-            statusBadge.innerHTML = '<i class="fas fa-circle me-1"></i>Terkonfigurasi';
-            return;
+        if (snap.exists()) {
+            const config = snap.val();
+            if (config.url && config.youtubeId) {
+                // Jika YouTube
+                cctvLink.href = `https://www.youtube.com/watch?v=${config.youtubeId}`;
+                statusBadge.className = 'badge bg-success';
+                statusBadge.innerHTML = '<i class="fas fa-circle me-1"></i>Live';
+            } else if (config.url) {
+                // Jika URL custom
+                cctvLink.href = config.url;
+            }
+        } else {
+            // Default ke JambiTV
+            cctvLink.href = 'https://jambitv.co.id/live-tv/';
         }
-        
-        const config = snap.val();
-        const streamUrl = config.url || '';
-        const streamType = config.type || 'hls';
-        const streamTitle = config.title || 'Live CCTV';
-        
-        if (!streamUrl) {
-            console.log('⚠️ CCTV URL is empty');
-            statusBadge.className = 'badge bg-warning text-dark';
-            statusBadge.innerHTML = '<i class="fas fa-circle me-1"></i>URL Kosong';
-            return;
-        }
-        
-        urlDisplay.textContent = streamUrl;
-        
-        // Determine MIME type
-        let mimeType = 'application/x-mpegURL'; // Default HLS
-        if (streamType === 'mp4' || streamUrl.includes('.mp4')) {
-            mimeType = 'video/mp4';
-        } else if (streamType === 'webm' || streamUrl.includes('.webm')) {
-            mimeType = 'video/webm';
-        } else if (streamType === 'dash' || streamUrl.includes('.mpd')) {
-            mimeType = 'application/dash+xml';
-        }
-        
-        console.log('🎬 Stream URL:', streamUrl);
-        console.log('🎬 MIME Type:', mimeType);
-        
-        // Initialize Video.js player
-        if (!cctvPlayer) {
-            cctvPlayer = videojs('cctvPlayer', {
-                controls: true,
-                autoplay: true,
-                preload: 'auto',
-                muted: true,
-                fluid: true,
-                responsive: true,
-                playbackRates: [0.5, 1, 1.5, 2],
-                html5: {
-                    vhs: {
-                        overrideNative: true,
-                        enableLowInitialPlaylist: true
-                    }
-                }
-            });
-        }
-        
+    } catch (err) {
+        console.error('CCTV Init Error:', err);
+        // Set default link
+        const cctvLink = document.getElementById('cctvLink');
+        if (cctvLink) cctvLink.href = 'https://jambitv.co.id/live-tv/';
+    }
+}
         // Set source
         cctvPlayer.src({ type: mimeType, src: streamUrl });
         
